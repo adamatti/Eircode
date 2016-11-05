@@ -21,19 +21,34 @@ class PostcoderWeb {
 
     @PostConstruct
     void registerEndpoint(){
-        Closure handleCode = { Request req, Response res ->
+        Spark.get("/address/ie/:code") { Request req, Response res ->
             String code = req.params("code")
-
-            res.header("Content-Type", DEFAULT_CONTENT_TYPE)
-            Map query = req.queryParams().collectEntries{[it,req.queryParams(it)]}
-            Object result = repository.get("address/ie/$code",query)
-            toJson(result)
+            handleRequest("address/ie/$code", req, res)
+        }
+        Spark.get("/addressgeo/ie/:code"){ Request req, Response res ->
+            String code = req.params("code")
+            handleRequest("addressgeo/ie/$code", req, res)
+        }
+        Spark.get("/position/ie/:code"){ Request req, Response res ->
+            String code = req.params("code")
+            handleRequest("position/ie/$code", req, res)
         }
 
-        //Sample http://localhost:8080/address/ie/D02X285
-        Spark.get("/address/ie/:code", handleCode)
-        Spark.get("/addressgeo/ie/:code", handleCode)
-        Spark.get("/position/ie/:code", handleCode)
+        Spark.get("/rgeo/ie/:latitude/:longitude"){ Request req, Response res ->
+            String latitude = req.params("latitude")
+            String longitude = req.params("longitude")
+
+            handleRequest("rgeo/ie/$latitude/$longitude", req, res)
+        }
+    }
+
+    private String handleRequest(String path, Request req, Response res){
+        assert !path.startsWith("/")
+
+        res.header("Content-Type", DEFAULT_CONTENT_TYPE)
+        Map query = req.queryParams().collectEntries{[it,req.queryParams(it)]}
+        Object result = repository.get(path,query)
+        toJson(result)
     }
 
     private String toJson(Object obj){
