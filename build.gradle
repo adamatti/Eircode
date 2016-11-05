@@ -1,0 +1,31 @@
+apply plugin: "groovy"
+apply plugin: "idea"
+apply plugin: "application"
+
+mainClassName = "adamatti.Main"
+
+configurations {
+    all*.exclude group:"org.slf4j", module: "slf4j-simple"
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.1.7'
+    compile group: 'org.codehaus.groovy', name: 'groovy-all', version: '2.4.7'
+    compile group: 'com.sparkjava', name: 'spark-core', version: '2.5.1'
+    compile group: 'org.springframework', name: 'spring-context', version: '4.3.3.RELEASE'
+
+    testCompile group: 'org.spockframework', name: 'spock-core', version: '1.1-groovy-2.4-rc-2'
+}
+
+
+
+idea {
+    module {
+        downloadJavadoc = false
+        downloadSources = false
+    }
+}
