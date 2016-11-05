@@ -21,24 +21,28 @@ class PostcoderWeb {
 
     @PostConstruct
     void registerEndpoint(){
-        Spark.get("/address/ie/:code") { Request req, Response res ->
+        Spark.get("/address/:country/:code") { Request req, Response res ->
+            String country = req.params("country")
             String code = req.params("code")
-            handleRequest("address/ie/$code", req, res)
+            handleRequest("address/$country/$code", req, res)
         }
-        Spark.get("/addressgeo/ie/:code"){ Request req, Response res ->
+        Spark.get("/addressgeo/:country/:code"){ Request req, Response res ->
+            String country = req.params("country")
             String code = req.params("code")
-            handleRequest("addressgeo/ie/$code", req, res)
+            handleRequest("addressgeo/$country/$code", req, res)
         }
-        Spark.get("/position/ie/:code"){ Request req, Response res ->
+        Spark.get("/position/:country/:code"){ Request req, Response res ->
+            String country = req.params("country")
             String code = req.params("code")
-            handleRequest("position/ie/$code", req, res)
+            handleRequest("position/$country/$code", req, res)
         }
 
-        Spark.get("/rgeo/ie/:latitude/:longitude"){ Request req, Response res ->
+        Spark.get("/rgeo/:country/:latitude/:longitude"){ Request req, Response res ->
+            String country = req.params("country")
             String latitude = req.params("latitude")
             String longitude = req.params("longitude")
 
-            handleRequest("rgeo/ie/$latitude/$longitude", req, res)
+            handleRequest("rgeo/$country/$latitude/$longitude", req, res)
         }
     }
 
