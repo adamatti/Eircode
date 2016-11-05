@@ -1,6 +1,7 @@
 apply plugin: "groovy"
 apply plugin: "idea"
 apply plugin: "application"
+apply plugin:"jacoco"
 
 mainClassName = "adamatti.Main"
 
@@ -58,3 +59,6 @@ task e2eTest(type: Test) { // do not dependsOn='test' or you'll break IDEA debug
 }
 
 task stage(dependsOn: [build])
+
+jacocoTestReport.dependsOn "test"
+check.dependsOn "jacocoTestReport"
