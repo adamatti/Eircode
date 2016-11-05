@@ -1,0 +1,13 @@
+{
+  "name": "Eircode",
+  "description": "Pet project",
+  "repository": "https://github.com/adamatti/Eircode",
+  "addons":[
+    "logentries:le_tryit",
+    "rediscloud",
+    "redismonitor:free"
+  ],
+  "env" : {
+    "FAKE_ENABLED" : "false"
+  }
+}
