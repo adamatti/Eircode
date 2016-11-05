@@ -1,3 +1,14 @@
+web:
+  build: .
+  command: ./gradlew run
+  ports:
+    - "4567:4567"
+  expose:
+    - "4567"
+  environment:
+    PORT: "4567"
+    FAKE_ENABLED: "true"
+
 tests:
   build: .
   command: ./gradlew e2eTest

@@ -1,5 +1,5 @@
 ci: clean build
-	docker-compose -f docker-compose.yml -f docker-compose-ci.yml run tests ./gradlew e2eTest --stacktrace
+	docker-compose -f docker-compose-ci.yml run tests ./gradlew e2eTest --stacktrace
 	${MAKE} clean
 
 run: clean build

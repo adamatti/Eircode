@@ -7,3 +7,4 @@ web:
     - "4567"
   environment:
     PORT: "4567"
+    FAKE_ENABLED: "false"
