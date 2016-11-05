@@ -13,7 +13,7 @@ class Main {
         log.info("Starting")
         startSpark()
         buildSpringContext()
-        log.info("Started")
+        log.info("Started [port: ${cfg.port}]")
     }
 
     static void startSpark(){
