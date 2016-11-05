@@ -64,7 +64,7 @@ task e2eTest(type: Test) { // do not dependsOn='test' or you'll break IDEA debug
     outputs.upToDateWhen { false }
 }
 
-task stage(dependsOn: [installDist, build])
+task stage(dependsOn: [installDist])
 
 jacocoTestReport.dependsOn "test"
 check.dependsOn "jacocoTestReport"
