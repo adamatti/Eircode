@@ -1,12 +1,16 @@
 package adamatti.app.web
 
 import adamatti.Config
+import groovy.util.logging.Slf4j
 import groovyx.net.http.HttpResponseDecorator
 import groovyx.net.http.RESTClient
 import spock.lang.Specification
 import spock.lang.Unroll
 
+@Slf4j
 class PostcoderWebTest extends Specification{
+    private def cfg = Config.cfg
+
     @Unroll
     def "test endpoints (#url)"(){
         when:
@@ -23,9 +27,8 @@ class PostcoderWebTest extends Specification{
     }
 
     private HttpResponseDecorator call(String url){
-        int port = Config.cfg.port
-
-        RESTClient client = new RESTClient("http://localhost:${port}")
+        log.info("Calling ${cfg.test.baseUrl}${url}")
+        RESTClient client = new RESTClient(cfg.test.baseUrl)
         client.get(path: url)
     }
 }

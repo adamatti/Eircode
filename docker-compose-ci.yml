@@ -1,0 +1,9 @@
+tests:
+  build: .
+  command: ./gradlew e2eTest
+  links:
+    - web
+  environment:
+    SERVER_TO_TEST: "web"
+    PORT: "4567"
+

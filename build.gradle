@@ -4,8 +4,23 @@ apply plugin: "application"
 
 mainClassName = "adamatti.Main"
 
+sourceSets {
+    e2eTest {
+        groovy {
+            compileClasspath += main.output + test.output
+            runtimeClasspath += main.output + test.output
+            srcDir file('src/e2e-test/groovy')
+        }
+        resources.srcDir file('src/e2e-test/resources')
+    }
+}
+
 configurations {
-    all*.exclude group:"org.slf4j", module: "slf4j-simple"
+    e2eTestCompile.extendsFrom testCompile
+    e2eTestRuntime.extendsFrom testRuntime
+
+    all*.exclude group: "org.slf4j", module: "slf4j-simple"
+    all*.exclude group: "log4j", module: "log4j"
 }
 
 repositories {
@@ -24,11 +39,18 @@ dependencies {
     testCompile group: 'org.spockframework', name: 'spock-core', version: '1.1-groovy-2.4-rc-2'
 }
 
-
-
 idea {
     module {
         downloadJavadoc = false
         downloadSources = false
     }
 }
+
+task e2eTest(type: Test) { // do not dependsOn='test' or you'll break IDEA debugger
+    group = 'verification'
+    testClassesDir = sourceSets.e2eTest.output.classesDir
+    classpath = sourceSets.e2eTest.runtimeClasspath
+    outputs.upToDateWhen { false }
+}
+
+task stage(dependsOn: [build])

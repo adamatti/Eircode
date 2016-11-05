@@ -5,3 +5,7 @@ postcoder = [
     baseUrl : "http://ws.postcoder.com/pcw/${searchKey}/",
     searchKey : searchKey
 ]
+
+test = [
+    baseUrl : "http://${System.env.SERVER_TO_TEST ?:'localhost'}:$port"
+]
