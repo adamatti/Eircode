@@ -1,3 +1,9 @@
+redis:
+  log_driver: "none"
+  image: redis
+  expose:
+    - "6379"
+
 web:
   build: .
   command: ./gradlew run
@@ -5,6 +11,9 @@ web:
     - "4567:4567"
   expose:
     - "4567"
+  links:
+    - redis
   environment:
     PORT: "4567"
     FAKE_ENABLED: "false"
+    REDISCLOUD_URL: "redis://redis:6379"

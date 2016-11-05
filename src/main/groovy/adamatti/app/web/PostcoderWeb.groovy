@@ -1,7 +1,6 @@
 package adamatti.app.web
 
-import adamatti.app.repositories.PostcoderRepository
-import groovy.json.JsonBuilder
+import adamatti.app.service.PostcoderService
 import groovy.util.logging.Slf4j
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
@@ -17,7 +16,7 @@ class PostcoderWeb {
     private static String DEFAULT_CONTENT_TYPE = "application/json"
 
     @Autowired
-    private PostcoderRepository repository
+    private PostcoderService service
 
     @PostConstruct
     void registerEndpoint(){
@@ -51,11 +50,6 @@ class PostcoderWeb {
 
         res.header("Content-Type", DEFAULT_CONTENT_TYPE)
         Map query = req.queryParams().collectEntries{[it,req.queryParams(it)]}
-        Object result = repository.get(path,query)
-        toJson(result)
-    }
-
-    private String toJson(Object obj){
-        new JsonBuilder(obj).toPrettyString()
+        service.get(path,query)
     }
 }

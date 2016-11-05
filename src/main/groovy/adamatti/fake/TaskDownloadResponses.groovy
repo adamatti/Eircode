@@ -1,5 +1,6 @@
 package adamatti.fake
 
+import adamatti.Config
 import adamatti.app.repositories.PostcoderRepository
 import groovy.json.JsonBuilder
 import groovy.util.logging.Slf4j
@@ -13,6 +14,9 @@ class TaskDownloadResponses {
     private static final String DOWNLOAD_FOLDER = "src/main/resources/fake"
 
     private void downloadResponses(){
+        def cfg = Config.cfg
+        assert !cfg.fakeEnabled
+
         PostcoderRepository repository = new PostcoderRepository()
 
         [
@@ -20,6 +24,7 @@ class TaskDownloadResponses {
             [url: "address/uk/NR147PZ"],
             [url: "address/uk/manor farm barns"],
             [url: "addressgeo/ie/Adelaide Road", query: [addtags:"w3w"]],
+            [url: "addressgeo/ie/D02X285"],
             [url: "position/ie/D02X285"],
             [url: "rgeo/ie/53.332067/-6.255492", query: [distance:50]]
 
