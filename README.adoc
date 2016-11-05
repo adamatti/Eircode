@@ -8,7 +8,7 @@ Pet project to play with postal code API, available here:
 * To run, check `Makefile`
 * It uses 12 factor concepts
 * API responses are also stored in the project to avoid burn the real search key
-* Travis: https://travis-ci.org/adamatti/Eircode[build status]. Note: E2E tests with docker aren't executed here
+* Travis: https://travis-ci.org/adamatti/Eircode[build status] / https://codecov.io/gh/adamatti/Eircode[code coverage]. Note: E2E tests with docker aren't executed here
 
 #### Next steps?
 * Hystrix
