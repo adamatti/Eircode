@@ -51,6 +51,12 @@ idea {
     }
 }
 
+jacocoTestReport {
+    reports {
+        xml.enabled true
+    }
+}
+
 task e2eTest(type: Test) { // do not dependsOn='test' or you'll break IDEA debugger
     group = 'verification'
     testClassesDir = sourceSets.e2eTest.output.classesDir
