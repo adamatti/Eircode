@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component
 class PostcoderRepository {
     private def cfg = Config.cfg
 
-    Object get(String path, Map query){
+    Object get(String path, Map query = [:]){
         query.format = "json" //format should be aways json
 
         getClient().get(
