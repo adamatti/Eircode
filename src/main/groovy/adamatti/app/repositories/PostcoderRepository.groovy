@@ -11,6 +11,8 @@ class PostcoderRepository {
     private def cfg = Config.cfg
 
     Object get(String path, Map query = [:]){
+        assert !path.startsWith("/")
+
         query.format = "json" //format should be aways json
 
         log.trace("Calling ${cfg.postcoder.baseUrl}${path}, query: ${query}")
